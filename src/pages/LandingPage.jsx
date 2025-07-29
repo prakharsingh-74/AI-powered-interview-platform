@@ -4,8 +4,8 @@ import { APP_FEATURES } from "../utils/data";
 import { useNavigate } from "react-router-dom";
 import { LuSparkles } from "react-icons/lu";
 import Modal from "../components/Modal";
-import {Login} from "../pages/Auth/Login"
-import {SignUp} from "../pages/Auth/Signup"
+import Login from "../pages/Auth/Login"
+import SignUp from "../pages/Auth/Signup"
 
 const LandingPage = () => {
   const navigate = useNavigate();
