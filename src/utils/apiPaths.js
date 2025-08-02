@@ -8,7 +8,7 @@ export const API_PATHS = {
     },
 
     IMAGE:{
-        UPLOAD: "/api/images/upload-image", //upload image to server
+        UPLOAD: "/api/auth/upload-image", //upload image to server
     },
 
     AI:{

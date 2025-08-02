@@ -1,8 +1,12 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/Inputs/Input";
 import ProfilePhotoSelector from "../../components/Inputs/ProfilePhotoSelector";
 import { validateEmail } from "../../utils/helper";
+import axiosInstance from "../../utils/axiosInstance";
+import { API_PATHS } from "../../utils/apiPaths";
+import uploadImage from "../../utils/uploadImage";
+import { UserContext } from "../../context/userContext";
 
 const Signup = ({ setcurrentPage }) => {
   const [profilePic, setProfilePic] = useState(null);
@@ -11,6 +15,7 @@ const Signup = ({ setcurrentPage }) => {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
+  const { updateUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   //Handle Signup form submit
@@ -37,6 +42,26 @@ const Signup = ({ setcurrentPage }) => {
 
       //signup API call
        try {
+        // upload image if present
+        if (profilePic){
+          const imgUploadRes = await uploadImage(profilePic);
+          profileImageUrl = imgUploadRes.imageUrl || "";
+        }
+
+        const response = await axiosInstance.post(API_PATHS.AUTH.REGISTER, {
+          name: fullName,
+          email,
+          password,
+          profileImageUrl,
+        });
+
+        const { token } = response.data;
+
+        if (token){
+          localStorage.setItem("token", token);
+          updateUser(response.data)
+          navigate("/dashboard")
+        }
       
     } catch (error) {
       if (error.response && error.response.data.message){
@@ -56,12 +81,12 @@ const Signup = ({ setcurrentPage }) => {
 
          <ProfilePhotoSelector image={profilePic} setImage={setProfilePic}/>
 
-        <div className="grid grid-cols-1 md:grid-cols-1 gap-2">
+        <div className="grid grid-cols-1 gap-2">
           <Input
             value={fullName}
             onchange={({ target }) => setFullName(target.value)}
             label="Full Name"
-            placeholder="John"
+            placeholder="John Doe"
             type="text"
           />
 
@@ -70,7 +95,7 @@ const Signup = ({ setcurrentPage }) => {
             onchange={({ target }) => setEmail(target.value)}
             label="Email Address"
             placeholder="john@example.com"
-            type="text"
+            type="email"
           />
 
           <Input
@@ -88,11 +113,11 @@ const Signup = ({ setcurrentPage }) => {
         </button>
 
         <p className="text-[13px] text-slate-800 mt-3">
-           Already an Account?{""}
-           <button className="font-medium text-primary underline cursor-pointer"
-             onClick={()=>{
-              setcurrentPage("login")
-             }}
+           Already have an Account?{""}
+           <button
+            type="button"
+            className="font-medium text-primary underline cursor-pointer"
+            onClick={() => setcurrentPage("login")}
            >
               Login
            </button>
