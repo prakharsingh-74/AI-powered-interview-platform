@@ -1,4 +1,4 @@
-export const BASE_URL="https://interview-platform-backend.vercel.app/";
+export const BASE_URL="https://interview-platform-backend-uawb.onrender.com/";
 
 export const API_PATHS = {
     AUTH:{
