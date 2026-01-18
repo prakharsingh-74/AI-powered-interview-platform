@@ -16,6 +16,14 @@ AI-powered interview preparation platform. Create sessions for roles (e.g., fron
 
 ---
 
+## ScreenShots
+
+<img width="1919" height="1029" alt="image" src="https://github.com/user-attachments/assets/749433f4-5651-4072-bdf3-05756c1069cb" />
+<img width="1919" height="1033" alt="image" src="https://github.com/user-attachments/assets/3f75ff5e-5671-4d83-8dde-767fc8bbbce6" />
+<img width="1919" height="1035" alt="image" src="https://github.com/user-attachments/assets/7393e870-cd8b-41db-a3a0-9f39bb5c3b25" />
+<img width="1918" height="1032" alt="image" src="https://github.com/user-attachments/assets/ac4847a6-69ff-461f-8be9-b3fb5a4f3392" />
+
+
 ## Prerequisites
 
 - Node.js 20+ and npm
