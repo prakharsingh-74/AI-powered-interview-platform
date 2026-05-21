@@ -371,4 +371,4 @@ docker build -t interview-client .
 docker run -p 5173:5173 interview-client
 ```
 
-Or use Docker Compose from the repo root — see the root [README](../README.md) for the compose file.
+Server Docs available here: [Server Docs](https://github.com/prakharsingh-74/Interview-platform-server)
